@@ -148,7 +148,9 @@ class Reader:
             result = self.read_symlink()
         elif token == TYPE_LINK:
             link_id = self.read_long()
-            result = self.objects[link_id]
+            result = None
+            if link_id in self.objects:
+                result = self.objects[link_id]
         elif token == TYPE_USERDEF:
             class_symbol = self.read()
             private_data = self.read(TYPE_STRING)
